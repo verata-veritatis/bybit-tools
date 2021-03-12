@@ -15,8 +15,8 @@ export default {
         accounts: [],
         autoconnect: true,
         
-        url: 'https://api.bybit.com/',
-        wsUrl: 'wss://stream.bybit.com/realtime',
+        url: 'https://api.bytick.com/',
+        wsUrl: 'wss://stream.bytick.com/realtime',
         ws: null,
         lastPrice: 0,
         markPrice: 0,
@@ -29,8 +29,8 @@ export default {
         currentQtyStep: 1,
         urls: {
           mainnet: {
-            url: 'https://api.bybit.com/',
-            wsUrl: 'wss://stream.bybit.com/realtime',
+            url: 'https://api.bytick.com/',
+            wsUrl: 'wss://stream.bytick.com/realtime',
           },
           testnet: {
             url: 'https://api-testnet.bybit.com/',
@@ -169,7 +169,7 @@ export default {
             let options = {
               params: this.signData(data),
             };
-            let res = await axios.get(this.url + 'open-api/order/list',
+            let res = await axios.get(this.url + 'v2/private/order/list',
                 options);
             if (res.data.ret_msg === 'ok') {
               if (res.data.result.data) {
@@ -204,7 +204,7 @@ export default {
             let options = {
               params: this.signData(data),
             };
-            let res = await axios.get(this.url + 'position/list',
+            let res = await axios.get(this.url + 'v2/private/position/list',
                 options);
             if (res.data.ret_msg === 'ok') {
               // console.log(res.data.result.filter(pos => pos.symbol === this.currentSymbol && pos.size > 0)) ;
@@ -245,7 +245,7 @@ export default {
           };
           try {
             let res = await axios.post(
-                this.url + 'open-api/position/trading-stop',
+                this.url + 'v2/private/position/trading-stop',
                 this.signData(data));
             console.log(res);
             if (res.data.ret_msg === 'ok') {
